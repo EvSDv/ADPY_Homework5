@@ -6,7 +6,8 @@ from email.mime.multipart import MIMEMultipart
 
 
 class Mail:
-    def __init__(self, mail_name, password, smtp, imap):
+    def __init__(self, mail_name, password,
+                 smtp='smtp.gmail.com', imap='imap.gmail.com'):
         self.mail_name = mail_name
         self.password = password
         self.smtp_server = smtp
@@ -40,10 +41,11 @@ class Mail:
         raw_email = data[0][1]
         email_message = email.message_from_bytes(raw_email)
         client_imap.logout()
-
+        return email_message
 
 
 if __name__ == '__main__':
-    mailbox = Mail('vyacheslav.eyhe@gmail.com', 'XXXXXXXX', 'smtp.gmail.com', 'imap.gmail.com')
-    mailbox.send_mail(['eyhev@mail.ru', 'eykhe.vyacheslav@sogaz-med.ru'], 'Test', 'Text message')
+    mailbox = Mail('vyacheslav.eyhe@gmail.com', 'XXXXXXXXXXX')
+    mailbox.send_mail(['eyhev@mail.ru', 'eykhe.vyacheslav@sogaz-med.ru'],
+                      'Test', 'Text message')
     mailbox.receive_mail()
